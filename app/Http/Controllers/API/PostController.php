@@ -51,27 +51,33 @@ class PostController extends Controller
             "data" => $post
         ]);
     }
-   public function update(Request $request, $id)
-{
-    // 1. Validation
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'body'  => 'required|string',
-    ]);
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'body'  => 'required|string',
+        ]);
+        $post = Post::findOrFail($id);
 
-    // 2. find() er bodole findOrFail() babohar korun
-    // Eta auto-check korbe, post na pele 404 error dibe, porer line-e jabeyi na
-    $post = Post::findOrFail($id);
+        // 3. Update
+        $post->title = $request->title;
+        $post->body  = $request->body;
+        $post->save();
 
-    // 3. Update
-    $post->title = $request->title;
-    $post->body  = $request->body;
-    $post->save();
-
-    return response()->json([
-        "status" => 1,
-        "message" => "Post Updated successfully",
-        "data" => $post
-    ]);
-}
+        return response()->json([
+            "status" => 1,
+            "message" => "Post Updated successfully",
+            "data" => $post
+        ]);
+    }
+    public function delete(Request $request, $id)
+    {
+        $post = Post::findOrFail($id);
+        $post->delete();
+        return response()->json([
+            "status" => 1,
+            "message" => "Post Deleted successfully",
+            "data" => $post
+        ]);
+    }
 }
