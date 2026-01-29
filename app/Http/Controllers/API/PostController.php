@@ -42,7 +42,8 @@ class PostController extends Controller
             "data" => $post
         ]);
     }
-    public function show(Request $request, $id){
+    public function show(Request $request, $id)
+    {
         $post = Post::find($id);
         return response()->json([
             "status" => 1,
@@ -50,4 +51,27 @@ class PostController extends Controller
             "data" => $post
         ]);
     }
+   public function update(Request $request, $id)
+{
+    // 1. Validation
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'body'  => 'required|string',
+    ]);
+
+    // 2. find() er bodole findOrFail() babohar korun
+    // Eta auto-check korbe, post na pele 404 error dibe, porer line-e jabeyi na
+    $post = Post::findOrFail($id);
+
+    // 3. Update
+    $post->title = $request->title;
+    $post->body  = $request->body;
+    $post->save();
+
+    return response()->json([
+        "status" => 1,
+        "message" => "Post Updated successfully",
+        "data" => $post
+    ]);
+}
 }
