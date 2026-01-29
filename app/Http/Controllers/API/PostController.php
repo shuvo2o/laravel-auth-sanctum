@@ -42,4 +42,12 @@ class PostController extends Controller
             "data" => $post
         ]);
     }
+    public function show(Request $request, $id){
+        $post = Post::find($id);
+        return response()->json([
+            "status" => 1,
+            "message" => "Post Return",
+            "data" => $post
+        ]);
+    }
 }
