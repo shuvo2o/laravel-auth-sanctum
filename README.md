@@ -44,4 +44,4 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 
 ## Code of Conduct
 
-In order to ensure that
+In order to ensure
