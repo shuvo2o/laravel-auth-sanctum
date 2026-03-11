@@ -42,6 +42,4 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 - **[Redberry](https://redberry.international/laravel-development)**
 - **[Active Logic](https://activelogic.com)**
 
-## Code of Conduct
-
-In order to ensure
+## Code of Conduct 
